@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table, th, td {
+      padding: 3px;
+    }
+  </style>
+</head>
+<body>
+<div id="omri"></div>
+<table id="yael" style="width: 90%" ></table>
+<script>
+  var line = []
+  var first_attribute = []
+  var second_attribute = []
+  fetch("result.json")
+  .then(response => response.json())
+  .then(data => {
+    data.key.forEach(element => line.push(element.line))
+    data.key.forEach(element => first_attribute.push(element.field1))
+    data.key.forEach(element => second_attribute.push(element.field2))
+
+    var table = document.getElementById("yael");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = "Line".bold();
+    cell2.innerHTML = "First Attribute".bold();
+    cell3.innerHTML = "Second Attribute".bold();
+
+    for (var i = 1; i < line.length; i++){
+      var row = table.insertRow(i);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2)
+      cell1.innerHTML = line[i];
+      cell2.innerHTML = first_attribute[i];
+      cell3.innerHTML = second_attribute[i];
+    }
+  })
+</script>
+</body>
+</html>
